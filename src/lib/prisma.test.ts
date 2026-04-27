@@ -1,20 +1,26 @@
 import { describe, it, expect, vi, beforeAll } from "vitest";
 
-// Prisma 7 uses the "client" engine which requires a driver adapter at construction
-// time. We mock @prisma/client so the singleton logic is tested without needing a
-// real database connection or an installed adapter package.
+// Prisma 7 requires a driver adapter at construction time. For unit tests of
+// the singleton's hot-reload behavior, we mock both @prisma/client and the Neon
+// adapter so the test doesn't need a real DB.
 vi.mock("@prisma/client", () => {
   class PrismaClient {
     $connect = vi.fn();
     $disconnect = vi.fn();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    constructor(_opts?: any) {}
+    constructor(_opts?: unknown) {}
   }
   return { PrismaClient };
 });
 
-// Import *after* the mock is registered so the module sees the mock.
-// We use a dynamic import + clearMocks-safe re-import via module cache.
+vi.mock("@prisma/adapter-neon", () => {
+  class PrismaNeon {
+    constructor(_opts?: unknown) {}
+  }
+  return { PrismaNeon };
+});
+
+process.env.DATABASE_URL ??= "postgres://test:test@localhost:5432/test";
+
 let prisma: { $connect: () => Promise<void>; $disconnect: () => Promise<void> };
 
 beforeAll(async () => {
