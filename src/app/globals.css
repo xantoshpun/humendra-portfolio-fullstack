@@ -862,3 +862,86 @@ nav.scrolled {
   .edu-exp-grid { grid-template-columns: 1fr; gap: 2rem; }
   .cert-grid    { grid-template-columns: 1fr; }
 }
+
+/* ── Floating background icons ──────────────────────────── */
+.bg-floating {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.float-icon {
+  position: absolute;
+  opacity: 0.10;
+  animation: gentle-float ease-in-out infinite;
+}
+@keyframes gentle-float {
+  0%   { transform: translateY(0px)   rotate(0deg);  }
+  30%  { transform: translateY(-25px) rotate(4deg);  }
+  70%  { transform: translateY(15px)  rotate(-4deg); }
+  100% { transform: translateY(0px)   rotate(0deg);  }
+}
+
+/* ── Footer ──────────────────────────────────────────────── */
+footer {
+  position: relative; z-index: 1;
+  background: var(--bg2);
+  padding: 3rem 2rem 2rem;
+}
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+.footer-brand h3 { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.35rem; }
+.footer-brand p  { font-size: 0.8rem; color: var(--muted); }
+.footer-cols { display: flex; gap: 2.5rem; }
+.footer-col h4 {
+  font-size: 0.68rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: #4b5563; margin-bottom: 0.75rem;
+}
+.footer-col a {
+  display: block; font-size: 0.85rem;
+  color: var(--muted); text-decoration: none;
+  margin-bottom: 0.45rem;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--cyan); }
+.footer-divider {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  margin: 0 0 1.25rem;
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.footer-bottom > span { font-size: 0.78rem; color: #4b5563; }
+.footer-bottom > span a { color: var(--muted); text-decoration: none; }
+.footer-bottom > span a:hover { color: var(--cyan); }
+.footer-socials { display: flex; gap: 0.5rem; }
+.soc-btn {
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--muted);
+  display: inline-flex; align-items: center; justify-content: center;
+  text-decoration: none;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.soc-btn:hover {
+  color: var(--cyan);
+  border-color: rgba(25,230,206,0.3);
+  background: rgba(25,230,206,0.06);
+}
+@media (max-width: 640px) {
+  .footer-top { flex-direction: column; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+}
