@@ -45,7 +45,7 @@ export async function EduExp() {
                       </div>
                       <span className="card-date">{e.date}</span>
                     </div>
-                    {e.honourColor === "cyan" && (
+                    {e.honour && (
                       <div className="honour-badge">{e.honour}</div>
                     )}
                     <div className="card-tags">
