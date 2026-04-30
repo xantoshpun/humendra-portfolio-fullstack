@@ -1,4 +1,5 @@
 import { revalidateTag } from "next/cache";
+import { z } from "zod";
 import { auth } from "@/auth";
 
 export class UnauthorizedError extends Error {
@@ -6,6 +7,15 @@ export class UnauthorizedError extends Error {
     super("UNAUTHORIZED");
     this.name = "UnauthorizedError";
   }
+}
+
+export function zodToFieldErrors(error: z.ZodError): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const issue of error.issues) {
+    const path = issue.path.join(".");
+    if (path && !out[path]) out[path] = issue.message;
+  }
+  return out;
 }
 
 export async function requireAdmin() {

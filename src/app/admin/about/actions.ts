@@ -8,15 +8,15 @@ import {
   type ActionResult,
 } from "@/lib/actions";
 import { CACHE_TAGS } from "@/lib/cache-tags";
-import { SiteMetaSchema, type SiteMetaInput } from "@/lib/schemas";
+import { AboutSchema, type AboutInput } from "@/lib/schemas";
 
-export async function updateSiteMeta(
+export async function updateAbout(
   id: string,
-  input: SiteMetaInput
+  input: AboutInput
 ): Promise<ActionResult> {
   await requireAdmin();
 
-  const parsed = SiteMetaSchema.safeParse(input);
+  const parsed = AboutSchema.safeParse(input);
   if (!parsed.success) {
     return {
       ok: false,
@@ -25,11 +25,11 @@ export async function updateSiteMeta(
     };
   }
 
-  await prisma.siteMeta.update({
+  await prisma.about.update({
     where: { id },
     data: parsed.data,
   });
 
-  revalidate(CACHE_TAGS.meta);
+  revalidate(CACHE_TAGS.about);
   return { ok: true };
 }
