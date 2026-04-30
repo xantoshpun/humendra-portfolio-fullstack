@@ -1,16 +1,8 @@
 import { unstable_cache } from "next/cache";
 import { prisma } from "./prisma";
+import { CACHE_TAGS, projectTag } from "./cache-tags";
 
-export const CACHE_TAGS = {
-  meta: "meta",
-  about: "about",
-  skills: "skills",
-  education: "education",
-  experience: "experience",
-  certifications: "certifications",
-  stats: "stats",
-  projects: "projects",
-} as const;
+export { CACHE_TAGS, projectTag };
 
 export const getSiteMeta = unstable_cache(
   async () => prisma.siteMeta.findFirst(),
@@ -74,5 +66,5 @@ export const getProjectBySlug = (slug: string) =>
         },
       }),
     ["project", slug],
-    { tags: [CACHE_TAGS.projects, `project:${slug}`] }
+    { tags: [CACHE_TAGS.projects, projectTag(slug)] }
   )();
