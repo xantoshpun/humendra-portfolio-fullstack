@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { Toaster } from "@/components/ui/sonner";
+import { AdminNav } from "./admin-nav";
 
 export default async function AdminLayout({
   children,
@@ -18,8 +19,9 @@ export default async function AdminLayout({
     );
   }
   return (
-    <div className="shadcn-theme">
-      {children}
+    <div className="shadcn-theme flex min-h-screen">
+      <AdminNav email={session.user.email!} />
+      <main className="flex-1 min-w-0 overflow-x-hidden">{children}</main>
       <Toaster richColors position="top-right" />
     </div>
   );
