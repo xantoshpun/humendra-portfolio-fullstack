@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { ImageUpload } from "@/components/admin/image-upload";
 
 type Mode = { kind: "create" } | { kind: "edit"; id: string };
 
@@ -229,9 +230,9 @@ export function ProjectForm({ mode, initial }: { mode: Mode; initial: ProjectInp
           name="thumbnailUrl"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Thumbnail URL (optional)</FormLabel>
+              <FormLabel>Thumbnail (optional)</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="https://… or /images/…" />
+                <ImageUpload value={field.value} onChange={field.onChange} />
               </FormControl>
               <FormMessage>{serverFieldErrors.thumbnailUrl}</FormMessage>
             </FormItem>
