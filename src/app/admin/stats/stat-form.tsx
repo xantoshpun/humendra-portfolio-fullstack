@@ -93,7 +93,7 @@ export function StatForm({ mode, initial }: { mode: Mode; initial: StatInput }) 
         setServerFieldErrors(
           Object.fromEntries(Object.entries(res.errors).map(([k, v]) => [k, v]))
         );
-        toast.error(res.message ?? "Couldn't save");
+        toast.error(res.message ?? "Couldn't save — see fields above");
       }
     });
   }

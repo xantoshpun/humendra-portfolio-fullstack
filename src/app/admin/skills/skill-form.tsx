@@ -99,7 +99,7 @@ export function SkillForm({
           mapped[k === "tags" ? "tagsCsv" : k] = v;
         }
         setServerFieldErrors(mapped);
-        toast.error(res.message ?? "Couldn't save");
+        toast.error(res.message ?? "Couldn't save — see fields above");
       }
     });
   }

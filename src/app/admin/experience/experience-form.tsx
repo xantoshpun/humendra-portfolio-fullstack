@@ -100,7 +100,7 @@ export function ExperienceForm({ mode, initial }: { mode: Mode; initial: Experie
           mapped[k === "skills" ? "skillsCsv" : k] = v;
         }
         setServerFieldErrors(mapped);
-        toast.error(res.message ?? "Couldn't save");
+        toast.error(res.message ?? "Couldn't save — see fields above");
       }
     });
   }

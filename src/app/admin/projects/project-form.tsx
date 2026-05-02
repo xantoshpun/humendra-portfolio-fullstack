@@ -116,7 +116,7 @@ export function ProjectForm({ mode, initial }: { mode: Mode; initial: ProjectInp
           mapped[k === "techTags" ? "techTagsCsv" : k] = v;
         }
         setServerFieldErrors(mapped);
-        toast.error(res.message ?? "Couldn't save");
+        toast.error(res.message ?? "Couldn't save — see fields above");
       }
     });
   }

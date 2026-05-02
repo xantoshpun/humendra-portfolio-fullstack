@@ -100,7 +100,7 @@ export function EducationForm({ mode, initial }: { mode: Mode; initial: Educatio
           mapped[k === "focus" ? "focusCsv" : k] = v;
         }
         setServerFieldErrors(mapped);
-        toast.error(res.message ?? "Couldn't save");
+        toast.error(res.message ?? "Couldn't save — see fields above");
       }
     });
   }
