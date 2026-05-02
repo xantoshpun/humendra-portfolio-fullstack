@@ -5,8 +5,6 @@ import { getSignedPutUrl } from "@/lib/r2";
 import { checkRateLimit, RateLimitedError } from "@/lib/rate-limit";
 import { randomFilename } from "./upload-utils";
 
-export { randomFilename, ALLOWED_MIME_TYPES } from "./upload-utils";
-
 const MAX_SIZE = 5_000_000;
 
 export async function requestUploadUrl(input: {
