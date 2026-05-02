@@ -2,6 +2,7 @@
 
 import { requireAdmin } from "@/lib/actions";
 import { getSignedPutUrl } from "@/lib/r2";
+import { checkRateLimit, RateLimitedError } from "@/lib/rate-limit";
 import { randomFilename } from "./upload-utils";
 
 export { randomFilename, ALLOWED_MIME_TYPES } from "./upload-utils";
@@ -16,7 +17,16 @@ export async function requestUploadUrl(input: {
   | { ok: true; url: string; publicUrl: string }
   | { ok: false; message: string }
 > {
-  await requireAdmin();
+  const session = await requireAdmin();
+
+  try {
+    checkRateLimit(session.user!.id!, "upload");
+  } catch (e) {
+    if (e instanceof RateLimitedError) {
+      return { ok: false, message: "Upload limit reached — try again in an hour" };
+    }
+    throw e;
+  }
 
   if (input.size > MAX_SIZE) {
     return { ok: false, message: "File exceeds 5 MB limit" };
