@@ -1,4 +1,4 @@
-import { revalidateTag } from "next/cache";
+import { updateTag } from "next/cache";
 import { z } from "zod";
 import { auth } from "@/auth";
 
@@ -27,7 +27,7 @@ export async function requireAdmin() {
 }
 
 export function revalidate(tag: string) {
-  revalidateTag(tag, "max");
+  updateTag(tag);
 }
 
 export type ActionResult<T = void> =

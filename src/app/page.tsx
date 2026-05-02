@@ -9,8 +9,6 @@ import { EduExp } from "@/components/EduExp";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 
-export const revalidate = 3600;
-
 export default function Home() {
   return (
     <>
