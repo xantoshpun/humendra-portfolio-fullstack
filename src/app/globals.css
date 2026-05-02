@@ -21,6 +21,17 @@
   --glow:   0 0 40px rgba(25,230,206,0.12);
 }
 
+/* ── Reset public nav styles inside admin ─────────────── */
+.shadcn-theme nav {
+  position: static;
+  inset: auto;
+  z-index: auto;
+  border-bottom: none;
+  background: transparent;
+  backdrop-filter: none;
+  transition: none;
+}
+
 /* ── shadcn/ui theme — scoped to admin only ───────────── */
 .shadcn-theme {
   --background: oklch(1 0 0);
