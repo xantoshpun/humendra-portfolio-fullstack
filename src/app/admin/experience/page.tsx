@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import { prisma } from "@/lib/prisma";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { ExperienceList } from "./experience-list";
 
 export const dynamic = "force-dynamic";
@@ -18,14 +18,10 @@ export default async function ExperiencePage() {
             Drag to reorder. Newer entries usually come first.
           </p>
         </div>
-        <Button
-          render={(props) => (
-            <Link {...props} href="/admin/experience/new">
-              <Plus className="size-4" />
-              New entry
-            </Link>
-          )}
-        />
+        <Link href="/admin/experience/new" className={buttonVariants()}>
+          <Plus className="size-4" />
+          New entry
+        </Link>
       </header>
 
       <ExperienceList

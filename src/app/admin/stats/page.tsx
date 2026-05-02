@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import { prisma } from "@/lib/prisma";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { StatsList } from "./stats-list";
 
 export const dynamic = "force-dynamic";
@@ -18,14 +18,10 @@ export default async function StatsPage() {
             Drag to reorder. These appear as highlight cards on the home page.
           </p>
         </div>
-        <Button
-          render={(props) => (
-            <Link {...props} href="/admin/stats/new">
-              <Plus className="size-4" />
-              New stat
-            </Link>
-          )}
-        />
+        <Link href="/admin/stats/new" className={buttonVariants()}>
+          <Plus className="size-4" />
+          New stat
+        </Link>
       </header>
 
       <StatsList

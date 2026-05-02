@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import { prisma } from "@/lib/prisma";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { SkillsList } from "./skills-list";
 
 export const dynamic = "force-dynamic";
@@ -18,14 +18,10 @@ export default async function SkillsPage() {
             Drag to reorder. Order on the public page matches the order here.
           </p>
         </div>
-        <Button
-          render={(props) => (
-            <Link {...props} href="/admin/skills/new">
-              <Plus className="size-4" />
-              New skill
-            </Link>
-          )}
-        />
+        <Link href="/admin/skills/new" className={buttonVariants()}>
+          <Plus className="size-4" />
+          New skill
+        </Link>
       </header>
 
       <SkillsList items={skills} />

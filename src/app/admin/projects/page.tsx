@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import { prisma } from "@/lib/prisma";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { ProjectsList } from "./projects-list";
 
 export const dynamic = "force-dynamic";
@@ -18,14 +18,10 @@ export default async function ProjectsPage() {
             Drag to reorder. Use Publish / Unpublish to control visibility.
           </p>
         </div>
-        <Button
-          render={(props) => (
-            <Link {...props} href="/admin/projects/new">
-              <Plus className="size-4" />
-              New project
-            </Link>
-          )}
-        />
+        <Link href="/admin/projects/new" className={buttonVariants()}>
+          <Plus className="size-4" />
+          New project
+        </Link>
       </header>
 
       <ProjectsList
