@@ -27,7 +27,9 @@ export async function requireAdmin() {
 }
 
 export function revalidate(tag: string) {
-  revalidateTag(tag);
+  // Single-arg form is deprecated in Next.js 16 but is the only form compatible
+  // with unstable_cache tags — the two-arg form uses a separate cache namespace.
+  (revalidateTag as unknown as (tag: string) => void)(tag);
 }
 
 export type ActionResult<T = void> =
