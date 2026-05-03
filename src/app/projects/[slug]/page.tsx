@@ -4,8 +4,6 @@ import remarkGfm from "remark-gfm";
 import Link from "next/link";
 import { getProjectBySlug, getPublishedProjects } from "@/lib/content";
 
-export const revalidate = 3600;
-
 export async function generateStaticParams() {
   const projects = await getPublishedProjects();
   return projects.map((p) => ({ slug: p.slug }));
