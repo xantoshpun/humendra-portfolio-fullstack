@@ -4,7 +4,6 @@ import { prisma } from "@/lib/prisma";
 import { buttonVariants } from "@/components/ui/button";
 import { EducationList } from "./education-list";
 
-export const dynamic = "force-dynamic";
 
 export default async function EducationPage() {
   const rows = await prisma.education.findMany({ orderBy: { order: "asc" } });

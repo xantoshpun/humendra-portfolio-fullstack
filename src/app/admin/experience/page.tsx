@@ -4,7 +4,6 @@ import { prisma } from "@/lib/prisma";
 import { buttonVariants } from "@/components/ui/button";
 import { ExperienceList } from "./experience-list";
 
-export const dynamic = "force-dynamic";
 
 export default async function ExperiencePage() {
   const rows = await prisma.experience.findMany({ orderBy: { order: "asc" } });

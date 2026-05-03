@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { ProjectForm } from "../project-form";
 
-export const dynamic = "force-dynamic";
 
 export default async function EditProjectPage({
   params,

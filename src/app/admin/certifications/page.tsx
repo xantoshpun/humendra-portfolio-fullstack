@@ -4,7 +4,6 @@ import { prisma } from "@/lib/prisma";
 import { buttonVariants } from "@/components/ui/button";
 import { CertificationsList } from "./certifications-list";
 
-export const dynamic = "force-dynamic";
 
 export default async function CertificationsPage() {
   const rows = await prisma.certification.findMany({ orderBy: { order: "asc" } });

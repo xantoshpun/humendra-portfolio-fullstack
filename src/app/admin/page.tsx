@@ -12,7 +12,6 @@ import {
 import { prisma } from "@/lib/prisma";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-export const dynamic = "force-dynamic";
 
 async function loadCounts() {
   const [
