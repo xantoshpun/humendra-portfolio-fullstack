@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { connection } from "next/server";
 import { auth } from "@/auth";
 import { Toaster } from "@/components/ui/sonner";
 import { AdminNav } from "./admin-nav";
@@ -8,6 +9,7 @@ export default async function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
+  await connection();
   const session = await auth();
   if (!session?.user) redirect("/login");
   if (session.user.role !== "ADMIN") {
