@@ -1,6 +1,8 @@
-import { prisma } from "@/lib/prisma";
+﻿import { prisma } from "@/lib/prisma";
 import { SiteMetaForm } from "./site-meta-form";
 
+
+export const dynamic = "force-dynamic";
 
 export default async function SiteMetaPage() {
   const row = await prisma.siteMeta.findFirst();

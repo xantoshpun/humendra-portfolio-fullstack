@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import {
   Settings,
   User,
@@ -58,6 +58,8 @@ const tiles = [
   { href: "/admin/stats", label: "Stats", icon: BarChart3, key: "stats" as const },
   { href: "/admin/projects", label: "Projects", icon: FolderKanban, key: "projects" as const },
 ];
+
+export const dynamic = "force-dynamic";
 
 export default async function AdminHome() {
   const counts = await loadCounts();

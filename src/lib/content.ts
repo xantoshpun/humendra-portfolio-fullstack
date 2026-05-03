@@ -1,76 +1,68 @@
-import { cacheTag, cacheLife } from "next/cache";
+import { unstable_cache } from "next/cache";
 import { prisma } from "./prisma";
 import { CACHE_TAGS, projectTag } from "./cache-tags";
 
 export { CACHE_TAGS, projectTag };
 
-export async function getSiteMeta() {
-  "use cache";
-  cacheLife("max");
-  cacheTag(CACHE_TAGS.meta);
-  return prisma.siteMeta.findFirst();
-}
+export const getSiteMeta = unstable_cache(
+  () => prisma.siteMeta.findFirst(),
+  ["meta"],
+  { tags: [CACHE_TAGS.meta] }
+);
 
-export async function getAbout() {
-  "use cache";
-  cacheLife("max");
-  cacheTag(CACHE_TAGS.about);
-  return prisma.about.findFirst();
-}
+export const getAbout = unstable_cache(
+  () => prisma.about.findFirst(),
+  ["about"],
+  { tags: [CACHE_TAGS.about] }
+);
 
-export async function getSkills() {
-  "use cache";
-  cacheLife("max");
-  cacheTag(CACHE_TAGS.skills);
-  return prisma.skill.findMany({ orderBy: { order: "asc" } });
-}
+export const getSkills = unstable_cache(
+  () => prisma.skill.findMany({ orderBy: { order: "asc" } }),
+  ["skills"],
+  { tags: [CACHE_TAGS.skills] }
+);
 
-export async function getEducation() {
-  "use cache";
-  cacheLife("max");
-  cacheTag(CACHE_TAGS.education);
-  return prisma.education.findMany({ orderBy: { order: "asc" } });
-}
+export const getEducation = unstable_cache(
+  () => prisma.education.findMany({ orderBy: { order: "asc" } }),
+  ["education"],
+  { tags: [CACHE_TAGS.education] }
+);
 
-export async function getExperience() {
-  "use cache";
-  cacheLife("max");
-  cacheTag(CACHE_TAGS.experience);
-  return prisma.experience.findMany({ orderBy: { order: "asc" } });
-}
+export const getExperience = unstable_cache(
+  () => prisma.experience.findMany({ orderBy: { order: "asc" } }),
+  ["experience"],
+  { tags: [CACHE_TAGS.experience] }
+);
 
-export async function getCertifications() {
-  "use cache";
-  cacheLife("max");
-  cacheTag(CACHE_TAGS.certifications);
-  return prisma.certification.findMany({ orderBy: { order: "asc" } });
-}
+export const getCertifications = unstable_cache(
+  () => prisma.certification.findMany({ orderBy: { order: "asc" } }),
+  ["certifications"],
+  { tags: [CACHE_TAGS.certifications] }
+);
 
-export async function getStats() {
-  "use cache";
-  cacheLife("max");
-  cacheTag(CACHE_TAGS.stats);
-  return prisma.stat.findMany({ orderBy: { order: "asc" } });
-}
+export const getStats = unstable_cache(
+  () => prisma.stat.findMany({ orderBy: { order: "asc" } }),
+  ["stats"],
+  { tags: [CACHE_TAGS.stats] }
+);
 
-export async function getPublishedProjects() {
-  "use cache";
-  cacheLife("max");
-  cacheTag(CACHE_TAGS.projects);
-  return prisma.project.findMany({
-    where: { publishedAt: { not: null, lte: new Date() } },
-    orderBy: [{ featured: "desc" }, { order: "asc" }],
-  });
-}
+export const getPublishedProjects = unstable_cache(
+  () =>
+    prisma.project.findMany({
+      where: { publishedAt: { not: null, lte: new Date() } },
+      orderBy: [{ featured: "desc" }, { order: "asc" }],
+    }),
+  ["projects"],
+  { tags: [CACHE_TAGS.projects] }
+);
 
-export async function getProjectBySlug(slug: string) {
-  "use cache";
-  cacheLife("max");
-  cacheTag(CACHE_TAGS.projects, projectTag(slug));
-  return prisma.project.findFirst({
-    where: {
-      slug,
-      publishedAt: { not: null, lte: new Date() },
-    },
-  });
+export function getProjectBySlug(slug: string) {
+  return unstable_cache(
+    () =>
+      prisma.project.findFirst({
+        where: { slug, publishedAt: { not: null, lte: new Date() } },
+      }),
+    [`project-${slug}`],
+    { tags: [CACHE_TAGS.projects, projectTag(slug)] }
+  )();
 }

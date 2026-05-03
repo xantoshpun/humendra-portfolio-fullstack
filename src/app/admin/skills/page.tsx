@@ -1,9 +1,11 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { Plus } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { buttonVariants } from "@/components/ui/button";
 import { SkillsList } from "./skills-list";
 
+
+export const dynamic = "force-dynamic";
 
 export default async function SkillsPage() {
   const skills = await prisma.skill.findMany({ orderBy: { order: "asc" } });

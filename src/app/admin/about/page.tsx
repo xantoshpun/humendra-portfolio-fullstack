@@ -1,7 +1,9 @@
-import { prisma } from "@/lib/prisma";
+﻿import { prisma } from "@/lib/prisma";
 import { AboutForm } from "./about-form";
 import type { AboutInput } from "@/lib/schemas";
 
+
+export const dynamic = "force-dynamic";
 
 export default async function AboutPage() {
   const row = await prisma.about.findFirst();
